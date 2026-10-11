@@ -3,10 +3,6 @@ import type { CV } from '../types/cv';
 /*
  * Single source of truth for the site's content.
  * Edit this file to update the CV; components only read from it.
- *
- * Tags on roles and projects should use the exact same spelling as the
- * skill names below, so the "where I've used it" lookup in the Skills
- * section can match them.
  */
 export const cv: CV = {
   profile: {
@@ -112,26 +108,11 @@ export const cv: CV = {
 
   projects: [
     {
-      name: 'PackageLibrary',
-      kind: 'Open source',
-      description: 'A set of reusable React / Next.js UI packages organised as a small component ecosystem.',
-      tags: ['React', 'JavaScript'],
-      url: 'https://github.com/FabianCienC/PackageLibrary',
-    },
-    {
       name: 'Mammographic mass segmentation',
       kind: 'Research',
       description:
         'Deep learning workflow for segmenting masses in mammograms: model design, training, evaluation and analysis of false positives.',
       tags: ['Python', 'Deep Learning', 'Computer Vision', 'Medical Imaging'],
-    },
-    {
-      name: 'Containers & CI/CD practice',
-      kind: 'Coursework',
-      description:
-        'Hands-on repositories from Docker, Kubernetes and GitHub Actions courses: images, deployments, workflows, custom actions and pipeline security.',
-      tags: ['Docker', 'Kubernetes', 'GitHub Actions', 'CI/CD', 'Express'],
-      url: 'https://github.com/FabianCienC?tab=repositories',
     },
     {
       name: 'VEX Robotics',

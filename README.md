@@ -19,9 +19,6 @@ All of the text lives in **`src/data/cv.ts`**. Components only read from it, so 
 publication or a skill normally means editing that one file. The shape of the data is defined in
 `src/types/cv.ts`.
 
-Tags on `experience` and `projects` should use the same spelling as the skill names in `skills`.
-That is how the "Where I've used …" panel in the Skills section finds matches.
-
 The source CV this site was built from is `Fabian_Cienfuegos_International_CV.docx.md`.
 
 ## Project structure

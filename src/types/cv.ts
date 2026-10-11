@@ -8,7 +8,7 @@ export interface Profile {
   shortName: string;
   headline: string;
   location: string;
-  summary: string[];
+  summary: string;
   links: Link[];
 }
 

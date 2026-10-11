@@ -19,8 +19,8 @@ export function FactList({ facts }: FactListProps) {
       animate(list.querySelectorAll('[data-reveal]'), {
         opacity: [0, 1],
         translateY: [12, 0],
-        delay: stagger(100, { start: 900 }),
-        duration: 700,
+        delay: stagger(60, { start: 300 }),
+        duration: 500,
         ease: 'outCubic',
       });
 
@@ -31,7 +31,7 @@ export function FactList({ facts }: FactListProps) {
   }, []);
 
   return (
-    <dl ref={listRef} className={styles.facts}>
+    <dl ref={listRef} className={styles.facts} data-print="hide">
       {facts.map((fact) => (
         <div key={fact.label} className={styles.fact} data-reveal>
           <dt>{fact.label}</dt>
@@ -41,7 +41,7 @@ export function FactList({ facts }: FactListProps) {
                 {fact.value.toFixed(fact.decimals ?? 0)}
               </span>
             ) : (
-              fact.value
+              <span className={styles.factText}>{fact.value}</span>
             )}
             {fact.suffix && <span className={styles.suffix}>{fact.suffix}</span>}
           </dd>

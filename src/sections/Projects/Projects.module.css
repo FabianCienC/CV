@@ -42,3 +42,13 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media print {
+  .project {
+    padding-block: 0.6rem 0.75rem;
+  }
+
+  .description {
+    margin-top: 0.3rem;
+  }
+}

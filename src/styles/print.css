@@ -5,7 +5,7 @@
   }
 
   html {
-    font-size: 11px;
+    font-size: 10.5px;
   }
 
   body {
@@ -21,10 +21,21 @@
     transform: none !important;
   }
 
+  /* Let sections flow across pages (keeps the PDF short); only keep single entries together. */
   section {
-    padding-block: 1.25rem !important;
+    padding-block: 1rem !important;
     border: 0 !important;
-    break-inside: avoid-page;
+  }
+
+  li,
+  h2,
+  h3 {
+    break-inside: avoid;
+  }
+
+  h2,
+  h3 {
+    break-after: avoid;
   }
 
   a {

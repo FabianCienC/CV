@@ -5,7 +5,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
   align-items: center;
   gap: 3rem;
 }
@@ -27,10 +27,20 @@
   color: var(--color-ink-soft);
 }
 
-.location {
+.summary {
   margin-top: 1.25rem;
+  max-width: 34rem;
+  color: var(--color-ink-soft);
+}
+
+.meta {
+  margin-top: 1rem;
   font-size: var(--text-sm);
   color: var(--color-ink-muted);
+}
+
+.printUrl {
+  display: none;
 }
 
 .links {
@@ -75,9 +85,11 @@
 
 /* Key facts */
 
+/* One column per fact, however many there are in cv.ts. */
 .facts {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
   margin-top: clamp(2.5rem, 6vw, 4rem);
   border-top: 1px solid var(--color-ink);
 }
@@ -115,16 +127,41 @@
   }
 
   .facts {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-flow: row;
   }
 
-  .fact:nth-child(3) {
+  .fact + .fact {
+    margin-top: 1rem;
     padding-left: 0;
     border-left: 0;
+    border-top: 1px solid var(--color-rule);
+  }
+}
+
+/* Text values (e.g. a certification name) are longer than numbers. */
+.factText {
+  display: block;
+  font-size: var(--text-lg);
+  line-height: 1.35;
+}
+
+@media print {
+  .hero {
+    padding-top: 0 !important;
   }
 
-  .fact:nth-child(n + 3) {
-    margin-top: 1rem;
-    border-top: 1px solid var(--color-rule);
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media print {
+  .printUrl {
+    display: inline;
+  }
+
+  .links {
+    flex-direction: column;
+    gap: 0.1rem;
   }
 }

@@ -4,26 +4,29 @@ import { Contact } from '../sections/Contact/Contact';
 import { Education } from '../sections/Education/Education';
 import { Experience } from '../sections/Experience/Experience';
 import { Hero } from '../sections/Hero/Hero';
-import { Profile } from '../sections/Profile/Profile';
 import { Projects } from '../sections/Projects/Projects';
 import { Research } from '../sections/Research/Research';
 import { Skills } from '../sections/Skills/Skills';
 
+/*
+ * Section order follows how a recruiter reads a CV: who you are (Hero),
+ * where you work now, what you studied, then supporting detail.
+ * See REVISOR_CV.md for the reasoning.
+ */
 export function App() {
   return (
     <>
-      <a href="#profile" className="visually-hidden">
+      <a href="#experience" className="visually-hidden">
         Skip to content
       </a>
       <SiteHeader />
       <main>
         <Hero />
-        <Profile />
         <Experience />
-        <Research />
-        <Skills />
-        <Projects />
         <Education />
+        <Skills />
+        <Research />
+        <Projects />
         <Contact />
       </main>
       <SiteFooter />

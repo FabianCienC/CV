@@ -10,11 +10,8 @@ export const cv: CV = {
     shortName: 'Fabián Cienfuegos',
     headline: 'Software Engineer — AI & Cloud. Biomedical Engineer by training.',
     location: 'Chihuahua, Mexico',
-    summary: [
-      'I build web applications and backend services, and I spend a good part of my time on machine learning, mostly applied to medical imaging. My background is in biomedical engineering, which taught me to treat software as something that has to work reliably in the real world, not just in a demo.',
-      'Day to day I work with Python, FastAPI, React, Angular, Docker and AWS. On the research side I collaborate with a university AI and medical computing lab, where I have co-authored work on mammographic mass segmentation and machine learning for diagnosis.',
-      'I am looking for software engineering roles where I can build scalable, dependable systems and keep growing in cloud and AI.',
-    ],
+    summary:
+      'I’m part of the Digital Transformation team at Safran, where I build and maintain applications with Angular, .NET, React and Python, and propose cloud, on-premise and machine learning solutions. I also research deep learning for medical imaging, with three peer-reviewed publications.',
     links: [
       { label: 'LinkedIn', href: 'https://www.linkedin.com/in/fabi%C3%A1n-cienfuegos-386484288/' },
       { label: 'GitHub', href: 'https://github.com/FabianCienC' },
@@ -23,23 +20,25 @@ export const cv: CV = {
   },
 
   facts: [
-    { label: 'Final GPA', value: 3.884, decimals: 3, suffix: ' / 4.0' },
+    { label: 'Currently at', value: 'Safran, Digital Transformation' },
+    { label: 'AWS Certified', value: 'Solutions Architect – Associate' },
     { label: 'Peer-reviewed publications', value: 3 },
-    { label: 'AWS certification', value: 'SAA-C03' },
-    { label: 'Currently at', value: 'Safran' },
   ],
 
   experience: [
     {
+      // TODO: exact job title and start month/year (e.g. "Mar 2026 – Present").
       title: 'Software Development',
       organization: 'Safran',
       location: 'Chihuahua, Mexico',
       period: 'Present',
       highlights: [
-        'Developing software solutions in an industrial engineering environment, with a focus on modern web development and the Angular ecosystem.',
-        'Applying software engineering practices to collaborative, production-oriented projects.',
+        'Develop and maintain applications with Angular, .NET, React and Python.',
+        'Member of the Digital Transformation team: we look for problems in day-to-day processes and find ways to redesign and digitize them.',
+        'Propose solution architectures for both on-premise and cloud deployments.',
+        'Propose machine learning and AI solutions for process and operational problems.',
       ],
-      tags: ['Angular', 'JavaScript', 'Git'],
+      tags: ['Angular', '.NET', 'React', 'Python', 'Machine Learning'],
     },
     {
       title: 'Research Collaborator',
@@ -47,9 +46,9 @@ export const cv: CV = {
       location: 'Chihuahua, Mexico',
       period: '2024 – Present',
       highlights: [
-        'Research on artificial intelligence for medical image analysis, particularly mammographic mass segmentation.',
-        'Developed and evaluated deep learning models and experimental pipelines for medical imaging.',
-        'Co-authored peer-reviewed work published in Springer proceedings (IFMBE) and Applied Sciences (MDPI).',
+        'Research AI methods for medical image analysis, focused on mammographic mass segmentation.',
+        'Develop and evaluate deep learning models and experimental pipelines for medical imaging.',
+        'Co-authored three peer-reviewed papers, published in Applied Sciences (MDPI) and IFMBE Proceedings (Springer).',
       ],
       tags: ['Python', 'Deep Learning', 'Computer Vision', 'Medical Imaging', 'Machine Learning'],
     },
@@ -57,6 +56,7 @@ export const cv: CV = {
       title: 'Innovation & Design Trainee',
       organization: 'Universidad Autónoma de Chihuahua',
       location: 'Chihuahua, Mexico',
+      // TODO: real start and end dates; "Earlier" reads as vague to recruiters.
       period: 'Earlier',
       highlights: [
         'Worked on technology projects involving AI, virtual reality and web applications for university departments.',
@@ -94,16 +94,22 @@ export const cv: CV = {
 
   skills: [
     { name: 'Programming', items: ['Python', 'JavaScript', 'C++', 'Java'] },
-    { name: 'Backend & Web', items: ['FastAPI', 'Express', 'REST APIs', 'React', 'Angular'] },
+    { name: 'Backend & Web', items: ['.NET', 'FastAPI', 'Express', 'REST APIs', 'React', 'Angular'] },
     {
       name: 'AI / ML',
-      items: ['Machine Learning', 'Deep Learning', 'Computer Vision', 'Medical Imaging', 'RAG / LLMs'],
+      items: [
+        'Machine Learning',
+        'Deep Learning',
+        'Computer Vision',
+        'Medical Imaging',
+        'RAG / LLM fundamentals',
+      ],
     },
     {
       name: 'Cloud & DevOps',
       items: ['AWS', 'Docker', 'Kubernetes', 'Git', 'GitHub Actions', 'CI/CD'],
     },
-    { name: 'Data', items: ['MongoDB', 'SQL', 'NumPy', 'Pandas', 'TensorFlow'] },
+    { name: 'Data', items: ['MongoDB', 'SQL (fundamentals)', 'NumPy', 'Pandas', 'TensorFlow'] },
   ],
 
   projects: [
@@ -128,6 +134,7 @@ export const cv: CV = {
       title: 'B.Eng. Biomedical Engineering',
       institution: 'Universidad Autónoma de Chihuahua (UACH)',
       location: 'Chihuahua, Mexico',
+      // TODO: graduation month/year.
       period: 'Graduated',
       notes: [
         'Final GPA 3.884 / 4.0.',
@@ -155,7 +162,7 @@ export const cv: CV = {
     { name: 'Angular Certified Developer', issuer: 'DW Training', year: 2025 },
     {
       name: 'Docker and Kubernetes: The Complete Course from Zero to Hero',
-      issuer: 'Online course',
+      issuer: 'Udemy',
       year: 2025,
     },
   ],

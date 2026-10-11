@@ -59,3 +59,18 @@
   font-size: var(--text-sm);
   color: var(--color-ink-muted);
 }
+
+@media print {
+  .statement {
+    max-width: none;
+    font-size: var(--text-base);
+  }
+
+  .subheading {
+    margin-top: 1rem;
+  }
+
+  .publication {
+    padding-block: 0.5rem;
+  }
+}

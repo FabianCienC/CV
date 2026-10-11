@@ -17,9 +17,9 @@ export function prefersReducedMotion(): boolean {
 export function revealIn(targets: Element[]) {
   return animate(targets, {
     opacity: [0, 1],
-    translateY: [18, 0],
-    duration: 750,
-    delay: stagger(70),
+    translateY: [12, 0],
+    duration: 500,
+    delay: stagger(50),
     ease: 'outCubic',
   });
 }
@@ -29,7 +29,7 @@ export function countUp(element: HTMLElement, to: number, decimals = 0) {
   const counter = { value: 0 };
   return animate(counter, {
     value: to,
-    duration: 1600,
+    duration: 1000,
     ease: 'outQuart',
     onUpdate: () => {
       element.textContent = counter.value.toFixed(decimals);

@@ -26,7 +26,7 @@ export function Education() {
 
       <div className={styles.columns}>
         <div data-reveal>
-          <h3 className={styles.subheading}>Certifications</h3>
+          <h3 className={styles.subheading}>Certifications &amp; training</h3>
           <ul className={styles.list}>
             {cv.certifications.map((certification) => (
               <li key={certification.name}>

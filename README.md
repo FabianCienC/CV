@@ -21,6 +21,9 @@ publication or a skill normally means editing that one file. The shape of the da
 
 The source CV this site was built from is `Fabian_Cienfuegos_International_CV.docx.md`.
 
+`REVISOR_CV.md` explains how recruiters actually read a CV, with three reviewer profiles
+(generic, software, research). The section order and wording follow it.
+
 ## Project structure
 
 ```

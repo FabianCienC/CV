@@ -4,7 +4,8 @@ import styles from './Contact.module.css';
 
 export function Contact() {
   return (
-    <Section id="contact" title="Contact">
+    // The PDF already lists these links in the header, so the section is skipped there.
+    <Section id="contact" title="Contact" hideInPrint>
       <ul className={styles.links} data-reveal>
         {cv.profile.links.map((link) => (
           <li key={link.href}>

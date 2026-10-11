@@ -34,3 +34,16 @@
     font-size: var(--text-xl);
   }
 }
+
+@media print {
+  /* Block layout lets the browser keep headings with the content that follows. */
+  .grid {
+    display: block;
+  }
+
+  .title {
+    position: static;
+    margin-bottom: 0.75rem;
+    font-size: var(--text-xl);
+  }
+}

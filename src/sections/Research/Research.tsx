@@ -38,7 +38,7 @@ export function Research() {
       </ol>
 
       {orcid && (
-        <p className={styles.orcid} data-reveal>
+        <p className={styles.orcid} data-reveal data-print="hide">
           Full record on{' '}
           <a href={orcid.href} target="_blank" rel="noreferrer">
             ORCID

@@ -1,23 +1,37 @@
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: default-deny-ingress
+  name: cv
   namespace: cv
 spec:
-  podSelector: {}
-  policyTypes: [Ingress]
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-from-traefik
-  namespace: cv
-spec:
-  podSelector: {}
-  policyTypes: [Ingress]
-  ingress:
-    - from:
-        - namespaceSelector:
-            matchLabels: { kubernetes.io/metadata.name: kube-system }
-          podSelector:
-            matchLabels: { app.kubernetes.io/name: traefik }
+  replicas: 1
+  selector:
+    matchLabels: { app: cv }
+  template:
+    metadata:
+      labels: { app: cv }
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile: { type: RuntimeDefault }
+      containers:
+        - name: cv
+          image: ghcr.io/fabiancienc/cv:latest
+          ports: [{ containerPort: 8080 }]
+          readinessProbe:
+            httpGet: { path: /, port: 8080 }
+          resources:
+            requests: { cpu: 20m, memory: 32Mi }
+            limits:   { cpu: 200m, memory: 128Mi }
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities: { drop: ["ALL"] }
+            readOnlyRootFilesystem: true
+          # nginx solo necesita escribir su pid y archivos temporales; todo lo demás es de solo lectura.
+          volumeMounts:
+            - { name: tmp, mountPath: /tmp }
+            - { name: nginx-cache, mountPath: /var/cache/nginx }
+      volumes:
+        - { name: tmp, emptyDir: { sizeLimit: 16Mi } }
+        - { name: nginx-cache, emptyDir: { sizeLimit: 16Mi } }

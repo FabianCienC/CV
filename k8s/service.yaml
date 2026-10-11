@@ -1,6 +1,10 @@
 apiVersion: v1
-kind: Namespace
+kind: Service
 metadata:
   name: cv
-  labels:
-    pod-security.kubernetes.io/enforce: restricted
+  namespace: cv
+spec:
+  selector: { app: cv }
+  ports:
+    - port: 80
+      targetPort: 8080

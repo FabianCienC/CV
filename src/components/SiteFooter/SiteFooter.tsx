@@ -8,7 +8,7 @@ export function SiteFooter() {
     <footer className={styles.footer} data-print="hide">
       <div className={`container ${styles.inner}`}>
         <p>
-          © {year} {cv.profile.name}
+          © {year} {cv.profile.name} / v{__APP_VERSION__}
         </p>
         <a href="#top">Back to top</a>
       </div>

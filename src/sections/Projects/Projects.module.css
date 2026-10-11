@@ -1,0 +1,44 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 2.5rem;
+  list-style: none;
+}
+
+.project {
+  display: flex;
+  flex-direction: column;
+  padding-block: 1.25rem 2rem;
+  border-top: 1px solid var(--color-ink);
+}
+
+.kind {
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+}
+
+.name {
+  margin-top: 0.375rem;
+  font-size: var(--text-xl);
+}
+
+.description {
+  margin-top: 0.625rem;
+  color: var(--color-ink-soft);
+}
+
+.link {
+  align-self: flex-start;
+  margin-top: 1rem;
+  font-size: var(--text-sm);
+}
+
+.link::after {
+  content: ' ↗';
+}
+
+@media (max-width: 40rem) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

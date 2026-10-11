@@ -1,0 +1,34 @@
+/* "Print / Save as PDF" produces a plain one-column document. */
+@media print {
+  @page {
+    margin: 16mm 14mm;
+  }
+
+  html {
+    font-size: 11px;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  [data-print='hide'] {
+    display: none !important;
+  }
+
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  section {
+    padding-block: 1.25rem !important;
+    border: 0 !important;
+    break-inside: avoid-page;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}

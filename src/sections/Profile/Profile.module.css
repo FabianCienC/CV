@@ -1,0 +1,41 @@
+.summary {
+  display: grid;
+  gap: 1.1rem;
+  max-width: 42rem;
+}
+
+.summary p:first-child {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  line-height: 1.5;
+}
+
+.summary p:not(:first-child) {
+  color: var(--color-ink-soft);
+}
+
+.languages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2.5rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-rule);
+  font-size: var(--text-sm);
+}
+
+.languages dt {
+  display: inline;
+  font-weight: 600;
+}
+
+.languages dt::after {
+  content: ' — ';
+  font-weight: 400;
+  color: var(--color-ink-muted);
+}
+
+.languages dd {
+  display: inline;
+  color: var(--color-ink-soft);
+}

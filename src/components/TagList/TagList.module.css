@@ -1,0 +1,13 @@
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 0.875rem;
+  list-style: none;
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+}
+
+.tags li + li::before {
+  content: '·';
+  margin-inline: 0.5em;
+}

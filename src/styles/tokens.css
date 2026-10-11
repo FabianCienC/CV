@@ -1,0 +1,29 @@
+:root {
+  /* Colour */
+  --color-paper: #f7f5f0;
+  --color-paper-dark: #efebe3;
+  --color-ink: #1c1d1f;
+  --color-ink-soft: #4a4d52;
+  --color-ink-muted: #75787d;
+  --color-rule: #d8d3c8;
+  --color-accent: #1d4a73;
+  --color-accent-soft: #e3e9ef;
+
+  /* Type */
+  --font-serif: 'Source Serif 4 Variable', Georgia, 'Times New Roman', serif;
+  --font-sans: 'IBM Plex Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.625rem;
+  --text-2xl: 2.25rem;
+  --text-display: clamp(2.5rem, 5.5vw, 4.25rem);
+
+  /* Layout */
+  --container: 70rem;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --header-height: 4rem;
+  --space-section: clamp(4rem, 9vw, 7rem);
+}

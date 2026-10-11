@@ -1,0 +1,93 @@
+.timeline {
+  position: relative;
+}
+
+.list {
+  display: grid;
+  gap: 2.75rem;
+  list-style: none;
+}
+
+.rail {
+  position: absolute;
+  top: 0.55rem;
+  bottom: 0;
+  left: 8.5rem;
+  width: 1px;
+  background: var(--color-rule);
+  transform-origin: top;
+}
+
+.role {
+  position: relative;
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  column-gap: 2rem;
+}
+
+/* Marker on the rail */
+.role::before {
+  content: '';
+  position: absolute;
+  top: 0.45rem;
+  left: calc(8.5rem - 4px);
+  width: 9px;
+  height: 9px;
+  background: var(--color-paper);
+  border: 1px solid var(--color-ink);
+  border-radius: 50%;
+  transition: background-color 200ms ease;
+}
+
+.role:hover::before {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.period {
+  padding-top: 0.15rem;
+  font-size: var(--text-sm);
+  color: var(--color-ink-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.title {
+  font-size: var(--text-xl);
+  font-weight: 600;
+}
+
+.organization {
+  margin-top: 0.25rem;
+  color: var(--color-ink-soft);
+}
+
+.location {
+  color: var(--color-ink-muted);
+}
+
+.highlights {
+  display: grid;
+  gap: 0.4rem;
+  margin-top: 0.875rem;
+  padding-left: 1.1rem;
+  color: var(--color-ink-soft);
+}
+
+.highlights li::marker {
+  color: var(--color-ink-muted);
+}
+
+@media (max-width: 40rem) {
+  .rail,
+  .role::before {
+    display: none;
+  }
+
+  .role {
+    grid-template-columns: 1fr;
+  }
+
+  .period {
+    margin-bottom: 0.25rem;
+  }
+}

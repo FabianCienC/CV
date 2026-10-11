@@ -1,0 +1,36 @@
+.section {
+  padding-block: var(--space-section);
+  border-top: 1px solid var(--color-rule);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 13rem minmax(0, 1fr);
+  gap: 2.5rem;
+}
+
+.title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  /* Keeps the heading visible while the long sections scroll past. */
+  position: sticky;
+  top: calc(var(--header-height) + 1.5rem);
+  align-self: start;
+}
+
+.body {
+  min-width: 0;
+}
+
+@media (max-width: 52rem) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .title {
+    position: static;
+    font-size: var(--text-xl);
+  }
+}

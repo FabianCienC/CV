@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write   # para guardar el tag nuevo en k8s/deployment.yaml
-  packages: write   # para subir la imagen a ghcr.io
+  contents: write   # TEMPORAL: el paso de Flux guarda el tag en k8s/deployment.yaml
+  packages: write
 
 concurrency:
   group: homelab
@@ -19,37 +19,54 @@ env:
   IMAGE: ghcr.io/fabiancienc/cv
 
 jobs:
-  build-and-release:
+  build-scan-push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3.7.0
+      - name: Construir imagen
+        run: docker build -t "$IMAGE:$GITHUB_SHA" .
+
+      - name: Escanear con Trivy
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
+        with:
+          image-ref: ${{ env.IMAGE }}:${{ github.sha }}
+          severity: CRITICAL,HIGH
+          ignore-unfixed: true
+          exit-code: "1"
+
+      - name: Login a GHCR
+        uses: docker/login-action@dbcb813823bdd20940b903addbd779551569679f # v4.6.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3.12.0
+      - name: Subir imagen
+        run: docker push "$IMAGE:$GITHUB_SHA"
 
-      - uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6.19.2
-        with:
-          context: .
-          push: true
-          tags: |
-            ${{ env.IMAGE }}:${{ github.sha }}
-            ${{ env.IMAGE }}:latest
+      # NUEVO: Argo CD (clúster kubeadm)
+      - name: Actualizar el tag en homelab-gitops
+        env:
+          DEPLOY_KEY: ${{ secrets.GITOPS_DEPLOY_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/gitops && chmod 600 ~/.ssh/gitops
+          echo "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl" >> ~/.ssh/known_hosts
+          export GIT_SSH_COMMAND="ssh -i ~/.ssh/gitops -o IdentitiesOnly=yes"
+          git clone --depth 1 git@github.com:FabianCienC/homelab-gitops.git "$RUNNER_TEMP/gitops"
+          cd "$RUNNER_TEMP/gitops"
+          yq -i '.images[0].newTag = strenv(GITHUB_SHA)' workloads/cv/kustomization.yaml
+          git config user.name "cv-ci"
+          git config user.email "cv-ci@users.noreply.github.com"
+          git commit -am "cv: imagen ${GITHUB_SHA::7}"
+          git push
 
-      # Flux en el homelab detecta este commit y despliega la imagen nueva.
+      # TEMPORAL: Flux (k3s en apps). Se borra en el paso 7.
       - name: Update image tag in k8s manifests
         run: |
           sed -i -E "s#^([[:space:]]*image:[[:space:]]*)ghcr\.io/[^/]+/cv(:[^[:space:]]*)?#\1${IMAGE}:${GITHUB_SHA}#I" k8s/deployment.yaml
-          echo "Línea image actual:"
-          grep -n "image:" k8s/deployment.yaml
-          if git diff --quiet; then
-            echo "El tag ya estaba actualizado; nada que hacer."
-            exit 0
-          fi
+          if git diff --quiet; then exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -am "deploy: cv ${GITHUB_SHA::7}"

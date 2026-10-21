@@ -17,7 +17,7 @@ spec:
         seccompProfile: { type: RuntimeDefault }
       containers:
         - name: cv
-          image: ghcr.io/fabiancienc/cv:c445ff20bbebddb6d0b2d86b530d8ab098532850
+          image: ghcr.io/fabiancienc/cv:3feea4e0ca22f7f6467787075023571a5881d305
           ports: [{ containerPort: 8080 }]
           readinessProbe:
             httpGet: { path: /, port: 8080 }

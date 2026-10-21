@@ -3,12 +3,10 @@ name: Build and deploy to homelab
 on:
   push:
     branches: [main]
-    paths-ignore:
-      - "k8s/**"
   workflow_dispatch:
 
 permissions:
-  contents: write   # TEMPORAL: el paso de Flux guarda el tag en k8s/deployment.yaml
+  contents: read
   packages: write
 
 concurrency:
@@ -23,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Construir imagen
         run: docker build -t "$IMAGE:$GITHUB_SHA" .
@@ -45,7 +45,6 @@ jobs:
       - name: Subir imagen
         run: docker push "$IMAGE:$GITHUB_SHA"
 
-      # NUEVO: Argo CD (clúster kubeadm)
       - name: Actualizar el tag en homelab-gitops
         env:
           DEPLOY_KEY: ${{ secrets.GITOPS_DEPLOY_KEY }}
@@ -60,14 +59,4 @@ jobs:
           git config user.name "cv-ci"
           git config user.email "cv-ci@users.noreply.github.com"
           git commit -am "cv: imagen ${GITHUB_SHA::7}"
-          git push
-
-      # TEMPORAL: Flux (k3s en apps). Se borra en el paso 7.
-      - name: Update image tag in k8s manifests
-        run: |
-          sed -i -E "s#^([[:space:]]*image:[[:space:]]*)ghcr\.io/[^/]+/cv(:[^[:space:]]*)?#\1${IMAGE}:${GITHUB_SHA}#I" k8s/deployment.yaml
-          if git diff --quiet; then exit 0; fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -am "deploy: cv ${GITHUB_SHA::7}"
           git push
